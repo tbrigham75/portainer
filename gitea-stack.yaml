@@ -1,0 +1,45 @@
+version: "3"
+
+networks:
+  gitea:
+    external: false
+
+services:
+  server:
+    image: gitea/gitea:1.22.3-rootless #tbrigham/gitea_rootless
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=mysql
+      - GITEA__database__HOST=db:3306
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=gitea
+      - GITEA__database__PASSWD=changeme
+    networks:
+      - gitea
+    volumes:
+      - /home/tom/dockervolumes/gitea/:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "2222:2222"
+
+    depends_on:
+    - db
+    restart: unless-stopped
+    
+  db:
+    image: mysql:8
+    container_name: mysql8
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeme
+      - MYSQL_USER=gitea
+      - MYSQL_PASSWORD=changeme
+      - MYSQL_DATABASE=gitea
+    networks:
+      - gitea
+    volumes:
+      - /home/tom/dockervolumes/gitea/mysql:/var/lib/mysql
+    restart: unless-stopped

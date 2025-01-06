@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  phpipam-web:
+    image: phpipam/phpipam-www:latest
+    ports:
+      - "9090:80"
+    environment:
+      - TZ=America/Denver
+      - IPAM_DATABASE_HOST=phpipam-mariadb
+      - IPAM_DATABASE_PASS=changeme
+      - IPAM_DATABASE_WEBHOST=%
+    restart: unless-stopped
+    volumes:
+      - /home/tom/dockervolumes/phpipam/logo:/phpipam/css/images/logo
+      - /home/tom/dockervolumes/phpipam/:/usr/local/share/ca-certificates:ro
+    depends_on:
+      - phpipam-mariadb
+
+  phpipam-cron:
+    image: phpipam/phpipam-cron:latest
+    environment:
+      - TZ=America/Denver
+      - IPAM_DATABASE_HOST=phpipam-mariadb
+      - IPAM_DATABASE_PASS=changeme
+      - SCAN_INTERVAL=1h
+    restart: unless-stopped
+    volumes:
+      - /home/tom/dockervolumes/phpipam-ca/:/usr/local/share/ca-certificates:ro
+    depends_on:
+      - phpipam-mariadb
+
+  phpipam-mariadb:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeme
+    restart: unless-stopped
+    volumes:
+      - /home/tom/dockervolumes/phpipam-mariadb/mysql:/var/lib/mysql

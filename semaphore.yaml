@@ -1,0 +1,17 @@
+services:
+  semaphore:
+    image: semaphoreui/semaphore:latest
+    container_name: semaphore
+    user: "${UID}:${GID}"
+    ports:
+      - 3939:3000
+    environment:
+      - SEMAPHORE_DB_DIALECT=bolt
+      - SEMAPHORE_ADMIN_PASSWORD=changeme
+      - SEMAPHORE_ADMIN_NAME=admin
+      - SEMAPHORE_ADMIN_EMAIL=admin@home.org
+      - SEMAPHORE_ADMIN=admin
+      - TZ=America/Denver
+    volumes:
+      - /home/tom/dockervolumes/semaphore/config:/etc/semaphore
+      - /home/tom/dockervolumes/semaphore/database:/var/lib/semaphore
