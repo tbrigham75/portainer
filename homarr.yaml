@@ -6,8 +6,8 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - /home/tom/dockervolumes/homarr/configs/:/app/data/configs
-      - /home/tom/dockervolumes/homarr/configs/icons:/app/public/icons
-      - /home/tom/dockervolumes/homarr/data:/data
+      - /home/tbrigham/dockervolumes/homarr/configs/:/app/data/configs
+      - /home/tbrigham/dockervolumes/homarr/configs/icons:/app/public/icons
+      - /home/tbrigham/dockervolumes/homarr/data:/data
     ports:
       - '7575:7575'

@@ -12,8 +12,8 @@ services:
       - IPAM_DATABASE_WEBHOST=%
     restart: unless-stopped
     volumes:
-      - /home/tom/dockervolumes/phpipam/logo:/phpipam/css/images/logo
-      - /home/tom/dockervolumes/phpipam/:/usr/local/share/ca-certificates:ro
+      - /home/tbrigham/dockervolumes/phpipam/logo:/phpipam/css/images/logo
+      - /home/tbrigham/dockervolumes/phpipam/:/usr/local/share/ca-certificates:ro
     depends_on:
       - phpipam-mariadb
 
@@ -26,7 +26,7 @@ services:
       - SCAN_INTERVAL=1h
     restart: unless-stopped
     volumes:
-      - /home/tom/dockervolumes/phpipam-ca/:/usr/local/share/ca-certificates:ro
+      - /home/tbrigham/dockervolumes/phpipam-ca/:/usr/local/share/ca-certificates:ro
     depends_on:
       - phpipam-mariadb
 
@@ -36,4 +36,4 @@ services:
       - MYSQL_ROOT_PASSWORD=changeme
     restart: unless-stopped
     volumes:
-      - /home/tom/dockervolumes/phpipam-mariadb/mysql:/var/lib/mysql
+      - /home/tbrigham/dockervolumes/phpipam-mariadb/mysql:/var/lib/mysql

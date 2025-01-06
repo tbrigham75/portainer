@@ -13,5 +13,5 @@ services:
       - SEMAPHORE_ADMIN=admin
       - TZ=America/Denver
     volumes:
-      - /home/tom/dockervolumes/semaphore/config:/etc/semaphore
-      - /home/tom/dockervolumes/semaphore/database:/var/lib/semaphore
+      - /home/tbrigham/dockervolumes/semaphore/config:/etc/semaphore
+      - /home/tbrigham/dockervolumes/semaphore/database:/var/lib/semaphore

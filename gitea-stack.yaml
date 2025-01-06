@@ -19,7 +19,7 @@ services:
     networks:
       - gitea
     volumes:
-      - /home/tom/dockervolumes/gitea/:/data
+      - /home/tbrigham/dockervolumes/gitea/:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
@@ -41,5 +41,5 @@ services:
     networks:
       - gitea
     volumes:
-      - /home/tom/dockervolumes/gitea/mysql:/var/lib/mysql
+      - /home/tbrigham/dockervolumes/gitea/mysql:/var/lib/mysql
     restart: unless-stopped
