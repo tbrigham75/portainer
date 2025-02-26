@@ -33,7 +33,7 @@ services:
       - SCAN_INTERVAL=1h
     restart: unless-stopped
     volumes:
-      - phpipam-ca:/usr/local/share/ca-certificates:ro
+      - /home/tbrigham/dockervolumes/phpipam:/usr/local/share/ca-certificates:ro
     depends_on:
       - phpipam-mariadb
 
@@ -43,9 +43,4 @@ services:
       - MYSQL_ROOT_PASSWORD=changeme
     restart: unless-stopped
     volumes:
-      - phpipam-db-data:/var/lib/mysql
-
-volumes:
-  phpipam-db-data:
-  phpipam-logo:
-  phpipam-ca:
+      - /home/tbrigham/dockervolumes/phpipam/mariadb:/var/lib/mysql
